@@ -23,8 +23,9 @@ grep "dtoverlay=w1-gpio" /boot/firmware/config.txt > /dev/null 2>&1 || {
   sudo reboot now
 }
 
+# run main once to make sure it doesn't throw
+python main.py
+
 python configure_cron.py
 
 echo "Setup complete."
-
-# add python main.py to cron
