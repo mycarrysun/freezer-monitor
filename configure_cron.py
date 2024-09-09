@@ -4,10 +4,9 @@ from crontab import CronTab
 
 def configure_cron():
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    script_path = f"{current_dir}/main.py"
 
     # Command to run every 5 minutes
-    command = f"python {script_path} >> {current_dir}/main.log 2>&1"
+    command = f"cd {current_dir} && ./main.sh >> main.log 2>&1"
 
     # Access the current user's crontab
     cron = CronTab(user=True)
