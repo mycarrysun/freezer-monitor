@@ -11,10 +11,9 @@ def configure_sensors():
 
     response = make_api_request('sensors/configure', json=data)
 
-    if response.status_code == 202:
-        print("Success")
-    else:
+    if response.status_code != 202:
         print("Error:", response.status_code, response.text)
+        raise response.text
 
 if __name__ == "__main__":
     configure_sensors()
