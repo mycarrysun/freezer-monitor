@@ -7,7 +7,7 @@ def configure_cron():
     script_path = f"{current_dir}/main.py"
 
     # Command to run every 5 minutes
-    command = f"python {script_path} >> {current_dir}/main.log"
+    command = f"python {script_path} >> {current_dir}/main.log 2>&1"
 
     # Access the current user's crontab
     cron = CronTab(user=True)
@@ -15,7 +15,7 @@ def configure_cron():
     # Add the job if it doesn't exist
     if not job_exists(cron, command):
         job = cron.new(command=command)
-        job.minute.every(5)
+        job.minute.every(1)
         cron.write()
         print("Cron job added successfully.")
     else:
