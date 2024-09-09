@@ -5,7 +5,10 @@ pip3 --version > /dev/null 2>&1 || {
   sudo apt install python3-pip
 }
 
-python -m venv venv
+if [ ! -d venv ]
+then
+  python -m venv venv
+fi
 source ./venv/bin/activate
 
 pip3 install -r requirements.txt
