@@ -15,7 +15,7 @@ python setup.py
 echo "API token was configured successfully."
 
 grep "dtoverlay=w1-gpio" /boot/firmware/config.txt > /dev/null 2>&1 || {
-  echo "dtoverlay=w1-gpio" >> /boot/firmware/config.txt
+  echo "dtoverlay=w1-gpio" | sudo tee -a /boot/firmware/config.txt
   echo "Updated /boot/firmware/config.txt. Rebooting now..."
   sudo reboot now
 }
