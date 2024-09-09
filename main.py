@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 def send_temp_reading(degrees):
-    response = make_api_request('sensors/create-reading', json={
+    response = make_api_request('sensors/readings', json={
         'degrees_c': degrees,
         'taken_at': datetime.utcnow().isoformat()+'Z',
     })
