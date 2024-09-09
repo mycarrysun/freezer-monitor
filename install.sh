@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-sudo apt install python3-pip
+pip3 --version > /dev/null 2>&1 || {
+  sudo apt install python3-pip
+}
 
 python -m venv venv
 source ./venv/bin/activate
