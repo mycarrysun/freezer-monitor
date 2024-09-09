@@ -4,10 +4,13 @@ from datetime import datetime
 
 
 def send_temp_reading(degrees):
-    make_api_request('sensors/create-reading', json={
+    response = make_api_request('sensors/create-reading', json={
         'degrees_c': degrees,
         'taken_at': datetime.utcnow().isoformat()+'Z',
     })
+    if response.status_code != 201:
+        print(response.content)
+        raise Exception(f'Unsuccessful response: {response.status_code}')
 
 
 if __name__ == "__main__":
