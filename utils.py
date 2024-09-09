@@ -18,7 +18,6 @@ def make_api_request(path, method='POST', json={}):
 def configure_api_token():
     load_dotenv(override=True)
     has_api_token = os.getenv(API_TOKEN) is not None
-    print(has_api_token)
     if has_api_token:
         confirm = input('You already have an API token set. Do you want to replace it? (y/n): ')
         if confirm == 'y':
