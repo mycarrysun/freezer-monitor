@@ -1,4 +1,4 @@
 w1thermsensor~=2.3.0
 requests~=2.32.3
 python-dotenv~=1.0.1
-crontab~=1.0.1
+python-crontab~=3.2.0
