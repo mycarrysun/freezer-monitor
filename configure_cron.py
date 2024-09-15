@@ -1,20 +1,16 @@
 import os
 from crontab import CronTab
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
+def configure_cron(command, schedule):
+    print(f'Configuring command: {command}')
+    print(f'on schedule: {schedule}')
 
-def configure_cron():
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-
-    # Command to run every 5 minutes
-    command = f"cd {current_dir} && ./main.sh >> main.log 2>&1"
-
-    # Access the current user's crontab
     cron = CronTab(user=True)
 
-    # Add the job if it doesn't exist
     if not job_exists(cron, command):
         job = cron.new(command=command)
-        job.minute.every(1)
+        job.setall(schedule)
         cron.write()
         print("Cron job added successfully.")
     else:
@@ -29,4 +25,11 @@ def job_exists(cron, command):
 
 
 if __name__ == "__main__":
-    configure_cron()
+    configure_cron(
+        command=f'cd {current_dir} && ./main.sh >> "main.$(date \'+%Y-%m-%d %H:%M:%S\').log" 2>&1',
+        schedule='* * * * *'
+    )
+    configure_cron(
+        command=f'cd {current_dir} && ./clean-logs.sh >> "clean-logs.$(date \'+%Y-%m-%d %H:%M:%S\').log" 2>&1',
+        schedule='0 0 * * *'
+    )
