@@ -26,10 +26,10 @@ def job_exists(cron, command):
 
 if __name__ == "__main__":
     configure_cron(
-        command=f'cd {current_dir} && ./main.sh >> "main.$(date \'+%Y-%m-%d %H:%M:%S\').log" 2>&1',
+        command=f'cd {current_dir} && ./main.sh >> "main.$(date \'+%Y-%m-%d\').log" 2>&1',
         schedule='* * * * *'
     )
     configure_cron(
-        command=f'cd {current_dir} && ./clean-logs.sh >> "clean-logs.$(date \'+%Y-%m-%d %H:%M:%S\').log" 2>&1',
+        command=f'cd {current_dir} && ./clean-logs.sh >> "clean-logs.$(date \'+%Y-%m-%d\').log" 2>&1',
         schedule='0 0 * * *'
     )
