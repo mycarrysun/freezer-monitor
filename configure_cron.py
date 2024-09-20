@@ -25,11 +25,18 @@ def job_exists(cron, command):
 
 
 if __name__ == "__main__":
+    # minutely run main script to send temperatures
     configure_cron(
         command=f'cd {current_dir} && ./main.sh >> "main.$(date \'+%Y-%m-%d\').log" 2>&1',
         schedule='* * * * *'
     )
+    # nightly job to clear the logs older than 3 days old
     configure_cron(
         command=f'cd {current_dir} && ./clean-logs.sh >> "clean-logs.$(date \'+%Y-%m-%d\').log" 2>&1',
+        schedule='0 0 * * *'
+    )
+    # nightly job to update this repo
+    configure_cron(
+        command=f'cd {current_dir} && ./update.sh >> "update.$(date \'+%Y-%m-%d\').log" 2>&1',
         schedule='0 0 * * *'
     )
